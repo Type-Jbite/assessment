@@ -77,14 +77,21 @@ if __name__ == '__main__':
     print("📏 Разрешенный радиус:", ALLOWED_RADIUS * 1000, "метров")
     print("⏰ Работает: Пн-Пт, круглосуточно")
 
+    import asyncio
     from telegram.ext import Application, CommandHandler, MessageHandler, filters
 
-    # Упрощенный запуск для Railway
-    application = Application.builder().token(USER_BOT_TOKEN).build()
-    
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(MessageHandler(filters.LOCATION, handle_location))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    
-    print("🔄 Бот запускается...")
-    application.run_polling()
+    async def main():
+        """Основная асинхронная функция"""
+        application = Application.builder().token(USER_BOT_TOKEN).build()
+        
+        application.add_handler(CommandHandler("start", start))
+        application.add_handler(MessageHandler(filters.LOCATION, handle_location))
+        application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+        
+        print("🔄 Бот запускается...")
+        await application.run_polling()
+
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("\n🛑 User бот остановлен")
