@@ -4,8 +4,8 @@ import math
 
 # === КОНФИГУРАЦИЯ ===
 
-CLASSROOM_LAT = 55.728900
-CLASSROOM_LON = 37.562056
+CLASSROOM_LAT = 55.727937
+CLASSROOM_LON = 37.574723
 ALLOWED_RADIUS = 1
 
 def calculate_distance(lat1, lon1, lat2, lon2):
@@ -21,3 +21,4 @@ def calculate_distance(lat1, lon1, lat2, lon2):
     distance = R * c
 
     return distance
+
